@@ -1,7 +1,23 @@
 var mongoose = require("mongoose");
 var express = require("express");
 var router = express.Router();
-var query = "mongodb+srv://gittrabajosparque123:1234@cluster0.r4hard0.mongodb.net/taskBD?retryWrites=true&w=majority&appName=Cluster0"
+let environment = null;
+
+if (!process.env.ON_RENDER) {
+    console.log("Cargando variables de entorno desde archivo");
+    const env = require('node-env-file');
+    env(__dirname + '/.env');
+}
+
+environment = {
+    DBMONGOUSER: process.env.DBMONGOUSER,
+    DBMONGOPASS: process.env.DBMONGOPASS,
+    DBMONGOSERV: process.env.DBMONGOSERV,
+    DBMONGO: process.env.DBMONGO,
+};
+
+var query = 'mongodb+srv://' + environment.DBMONGOUSER + ':' + environment.DBMONGOPASS + '@' + environment.DBMONGOSERV + '/' + environment.DBMONGO + '?retryWrites=true&w=majority';
+
 const db = (query);
 
 mongoose.Promise = global.Promise;

@@ -8,7 +8,7 @@ app.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-    res.send("hello world");
+    res.send("soraya , juan , martin ");
 });
 
 app.use('/api', api);
